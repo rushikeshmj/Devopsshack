@@ -1,0 +1,15 @@
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+
+
+
+helm install bankapp-mysql bitnami/mysql \
+  --namespace webapps \
+  -f values.yaml
+
+
+
+kubectl exec -it <pod-name> -n webapps -- mysql -u root -p
+# Enter password: Test@123
+
+mysql> SHOW VARIABLES LIKE 'read_only';

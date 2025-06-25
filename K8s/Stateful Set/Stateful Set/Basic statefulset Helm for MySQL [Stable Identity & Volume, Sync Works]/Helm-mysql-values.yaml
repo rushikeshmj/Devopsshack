@@ -1,0 +1,36 @@
+architecture: replication
+
+auth:
+  rootPassword: Test@123
+  username: appuser               # Non-root application user
+  password: appuser123
+  database: bankappdb
+  replicationUser: replica
+  replicationPassword: replica123
+
+replication:
+  enabled: true
+
+primary:
+  persistence:
+    enabled: true
+    storageClass: ebs-sc
+    size: 5Gi
+
+secondary:
+  replicaCount: 2
+  persistence:
+    enabled: true
+    storageClass: ebs-sc
+    size: 5Gi
+
+volumePermissions:
+  enabled: true
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
+  limits:
+    memory: 512Mi
+    cpu: 500m
